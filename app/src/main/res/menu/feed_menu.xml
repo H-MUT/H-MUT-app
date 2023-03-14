@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="수정하기"
+        android:enabled="true"
+        android:id="@+id/feed_revise"
+        />
+    <item
+        android:title="삭제하기"
+        android:enabled="true"
+        android:id="@+id/feed_delete"
+        />
+</menu>

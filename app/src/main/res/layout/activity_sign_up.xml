@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sign_Up">
+
+    <TextView
+        android:id="@+id/textSign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        />
+    <EditText
+        android:id="@+id/inputID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="이메일 주소 입력"
+        android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:ems="13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textSign_up"
+        />
+    <TextView
+        android:id="@+id/text_checkID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/checkPW"
+        app:layout_constraintTop_toBottomOf="@id/inputID"/>
+
+    <EditText
+        android:id="@+id/inputPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="8~15자리 비밀번호"
+        android:inputType="textPassword"
+        android:maxLength="15"
+        app:layout_constraintTop_toBottomOf="@+id/inputID"
+        app:layout_constraintLeft_toLeftOf="@+id/inputID"
+        android:layout_marginTop="20dp"
+        android:ems="13" />
+    <TextView
+        android:id="@+id/text_inputPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/checkPW"
+        app:layout_constraintTop_toBottomOf="@id/inputPW"/>
+
+    <EditText
+        android:id="@+id/checkPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호 확인"
+        android:inputType="textPassword"
+        android:maxLength="15"
+        app:layout_constraintTop_toBottomOf="@+id/inputPW"
+        app:layout_constraintLeft_toLeftOf="@+id/inputPW"
+        android:layout_marginTop="20dp"
+        android:ems="13" />
+    <TextView
+        android:id="@+id/text_checkPW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/checkPW"
+        app:layout_constraintTop_toBottomOf="@id/checkPW" />
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="별명"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/checkPW"
+        app:layout_constraintLeft_toLeftOf="@+id/checkPW"
+        android:layout_marginTop="20dp"
+        android:ems="13" />
+    <TextView
+        android:id="@+id/text_checkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_checkPW"
+        app:layout_constraintTop_toBottomOf="@id/inputName"/>
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/inputNumber"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="전화번호"-->
+    <!--        android:inputType="number"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/inputName"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@+id/inputName"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:ems="13"-->
+    <!--        android:maxLength="11"/>-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/text_checkNumber"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@id/text_checkPW"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/inputName"/>-->
+
+    <Button
+        android:id="@+id/checkID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="중복확인"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/textSign_up"
+        app:layout_constraintBottom_toBottomOf="@id/inputID"
+        android:layout_marginBottom="2dp" />
+    <Button
+        android:id="@+id/checkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="중복확인"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/textSign_up"
+        app:layout_constraintBottom_toBottomOf="@id/inputName"
+        android:layout_marginBottom="2dp" />
+    <Button
+        android:id="@+id/BackToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이전"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        app:layout_constraintLeft_toLeftOf="@id/inputName"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:id="@+id/signUp_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다음"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        app:layout_constraintRight_toRightOf="@id/inputName"
+        android:layout_marginTop="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

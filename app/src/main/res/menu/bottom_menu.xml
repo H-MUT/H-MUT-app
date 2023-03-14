@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="홈"
+        android:enabled="true"
+        android:id="@+id/menu_home"
+        />
+    <item
+        android:title="검색"
+        android:enabled="true"
+        android:id="@+id/menu_group_search"
+        />
+    <item
+        android:title="프로필"
+        android:enabled="true"
+        android:id="@+id/menu_profile"
+        />
+</menu>

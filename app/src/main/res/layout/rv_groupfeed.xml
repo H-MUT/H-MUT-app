@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/FeedUserImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/FeedContentImg"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitCenter"
+        />
+    <!--프로필 사진 들어갈 예정-->
+    <TextView
+        android:id="@+id/FeedUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/FeedUserImg"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="50px"
+        android:paddingTop="0px"
+        android:text="사용자 이름"
+        />
+    <!--유저 이름-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/Feed_menu_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/feed_menu"
+        />
+
+    <ImageView
+        android:id="@+id/FeedContentImg"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toBottomOf="@id/FeedUserName"/>
+
+
+    <!--유저가 선택한 사진-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/likebtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:lottie_fileName="heart.json"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="false"
+        app:layout_constraintTop_toBottomOf="@id/FeedContentImg"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        />
+
+    <!--좋아요 버튼-->
+    <Button
+        android:id="@+id/commentbtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintTop_toBottomOf="@id/FeedContentImg"
+        app:layout_constraintStart_toEndOf="@id/likebtn"
+        android:layout_margin="10dp"/>
+<!--    app:layout_constraintStart_toEndOf="@id/likebtn"-->
+
+    <!-- 댓글달기 버튼-->
+    <TextView
+        android:id="@+id/likecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/commentbtn"
+        android:text="받은 Like의 수 :"
+        android:layout_margin="10dp"
+        />
+    <TextView
+        android:id="@+id/likeNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/likecount"
+        app:layout_constraintTop_toBottomOf="@+id/commentbtn"
+        android:text="0"
+        android:layout_margin="10dp"
+        />
+
+    <!-- 좋아요 수 text -->
+    <TextView
+        android:id="@+id/FeedContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/likecount"
+        android:text="작성한 게시글의 내용"
+        android:layout_margin="10dp"
+        />
+
+    <!--게시글 내용-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
