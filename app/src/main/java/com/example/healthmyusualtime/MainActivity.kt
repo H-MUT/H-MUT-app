@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.healthmyusualtime.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
 
 class MainActivity : AppCompatActivity() {

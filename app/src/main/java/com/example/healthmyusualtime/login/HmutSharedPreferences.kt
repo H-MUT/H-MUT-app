@@ -5,7 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.healthmyusualtime.Information
 
-object UserInformation {
+object HmutSharedPreferences {
     private var myAccount : String = "account"
 
     fun setUserId(context: Context, input: String){
@@ -70,10 +70,10 @@ class Manager(val context: Context){
         lateinit var information: Information
         fun set(context: Context){
             information = Information(
-                UserInformation.getUserId(context),
-                UserInformation.getUserPw(context),
-                UserInformation.getUserName(context),
-                UserInformation.getUserInterest(context),
+                HmutSharedPreferences.getUserId(context),
+                HmutSharedPreferences.getUserPw(context),
+                HmutSharedPreferences.getUserName(context),
+                HmutSharedPreferences.getUserInterest(context),
             null)
         }
     }

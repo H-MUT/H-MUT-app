@@ -21,8 +21,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.healthmyusualtime.R
+import com.example.healthmyusualtime.login.HmutSharedPreferences
 import com.example.healthmyusualtime.login.Manager
-import com.example.healthmyusualtime.login.UserInformation
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -123,7 +123,7 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
         holder.bind(dataList[position])
         Log.d("test",dataList[position].isLiked.toString())
         val like_btn = holder.itemView.findViewById<LottieAnimationView>(R.id.likebtn)
-        val userid = UserInformation.getUserId(context)
+        val userid = HmutSharedPreferences.getUserId(context)
         val dataHomeFeed = dataList[position]
 
 
