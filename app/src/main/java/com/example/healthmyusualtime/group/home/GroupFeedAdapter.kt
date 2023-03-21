@@ -1,4 +1,4 @@
-package com.example.healthmyusualtime.group.feed
+package com.example.healthmyusualtime.group.home
 
 import android.animation.ValueAnimator
 import android.app.Activity
@@ -16,7 +16,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide

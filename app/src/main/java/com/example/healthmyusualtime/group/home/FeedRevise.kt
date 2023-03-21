@@ -1,4 +1,4 @@
-package com.example.healthmyusualtime.group.feed
+package com.example.healthmyusualtime.group.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

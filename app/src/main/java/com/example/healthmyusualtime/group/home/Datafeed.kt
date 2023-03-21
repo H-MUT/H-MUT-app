@@ -1,4 +1,4 @@
-package com.example.healthmyusualtime.group.feed
+package com.example.healthmyusualtime.group.home
 
 import com.example.healthmyusualtime.Information
 import com.example.healthmyusualtime.login.Manager

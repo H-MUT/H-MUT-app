@@ -32,9 +32,9 @@ class GroupMain : AppCompatActivity() {
 //                    Log.d("Success to feed",response.toString())
 //                    val tmpStr = response.body.string()
 //                    val list = ArrayList<DataHomeFeed>()
-//                    val feedList = gson.fromJson<DataHomeFeed>(tmpStr, DataHomeFeed::class.java)
+//                    val feedList = gson.fromJson<Datafeed>(tmpStr, Datafeed::class.java)
 //                    list.add(feedList)
-//                    val feedRVAdapter = HomeFeedAdapter(this@ClickFeed,list,true)
+//                    val feedRVAdapter = GroupFeedAdapter(this@ClickFeed,list,true)
 //                    CoroutineScope(Dispatchers.Main).launch{
 //                        feedRecyclerView.adapter = feedRVAdapter
 //                    }

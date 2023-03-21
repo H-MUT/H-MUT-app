@@ -18,24 +18,28 @@
         android:theme="@style/Theme.Healthmyusualtime"
         tools:targetApi="31">
         <activity
-            android:name=".group.feed.FeedRevise"
+            android:name=".login.UserInformation"
+            android:exported="false" />
+        <activity
+            android:name=".group.home.FeedRevise"
             android:exported="false" />
         <activity
             android:name=".group.GroupMain"
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:host="oauth"
+                <data
+                    android:host="oauth"
                     android:scheme="@string/kakao_redirection_scheme" />
             </intent-filter>
         </activity>
