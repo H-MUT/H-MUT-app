@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.UserInformation">
+
+    <TextView
+        android:id="@+id/textInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정보 입력하기"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        />
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/hmutlogo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInfo"
+        />
+
+    <Button
+        android:id="@+id/profilebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="프로필 사진"
+        app:layout_constraintLeft_toRightOf="@id/textInfo"
+        app:layout_constraintTop_toTopOf="@id/profileImage"
+        app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+        android:layout_marginBottom="5dp"
+        />
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="닉네임"
+        android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:ems="13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImage"
+        />
+
+    <Button
+        android:id="@+id/checkName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="중복확인"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/textInfo"
+        app:layout_constraintBottom_toBottomOf="@id/inputName"
+        android:layout_marginBottom="2dp" />
+
+    <TextView
+        android:id="@+id/inputMainInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메인 관심사"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="@id/inputName"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        />
+    <Spinner
+        android:id="@+id/mainInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/inputMainInter"
+        app:layout_constraintTop_toTopOf="@id/inputMainInter"
+        />
+    <TextView
+        android:id="@+id/inputSubInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서브 관심사"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toRightOf="@id/mainInter"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        />
+
+    <Spinner
+        android:id="@+id/subInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/inputSubInter"
+        app:layout_constraintTop_toTopOf="@id/inputMainInter"
+        />
+    <Button
+        android:id="@+id/UserInfoComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="50dp"
+        android:text="완료"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/UserInfoCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="돌아가기"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

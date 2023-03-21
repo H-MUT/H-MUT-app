@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.healthmyusualtime.databinding.ActivityLoginBinding
 import com.example.healthmyusualtime.login.HmutSharedPreferences
+import com.example.healthmyusualtime.login.UserInformation
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
@@ -27,7 +28,6 @@ class Login : AppCompatActivity() {
 
         val btn = binding.loginBtn
         val kakaobtn = binding.kakaoSignUp
-
 //        if(HmutSharedPreferences.getUserName(this).isNullOrBlank()) {
 //            Login()             // 저장된 로그인 값이 없을 때
 //        }
@@ -38,7 +38,7 @@ class Login : AppCompatActivity() {
         btn.setOnClickListener(){
             finish()
         }
-        //서버 통신하면 지워야 됨 현재는 로그인 버튼 클릭시 로그인 됏다고 가정
+        // 서버 통신하면 지워야 됨 현재는 로그인 버튼 클릭시 로그인 됏다고 가정
 
         kakaobtn.setOnClickListener(){
             kakaologin(this)
@@ -53,7 +53,14 @@ class Login : AppCompatActivity() {
                 Log.e(TAG, "카카오계정으로 로그인 실패", error)
             } else if (token != null) {
                 Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
-                finish()
+                if(HmutSharedPreferences.getUserName(this).isNullOrBlank()){ // 저장된 로그인 값이 없을 때
+                    val intent = Intent(applicationContext, UserInformation::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                else {
+                    finish()
+                }
             }
         }
 
@@ -75,7 +82,7 @@ class Login : AppCompatActivity() {
                     Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
                     // 여기서 이제 accessToken을 서버로 전송 하면서 전송이 되었을때, 넘어가기
                     if(HmutSharedPreferences.getUserName(this).isNullOrBlank()){ // 저장된 로그인 값이 없을 때
-                        val intent = Intent(applicationContext, Sign_Up::class.java)
+                        val intent = Intent(applicationContext, UserInformation::class.java)
                         startActivity(intent)
                         finish()
                     }
