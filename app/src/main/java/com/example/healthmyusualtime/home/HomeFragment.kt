@@ -1,6 +1,7 @@
 package com.example.healthmyusualtime.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,9 @@ import com.example.healthmyusualtime.MainActivity
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.SearchGroupFragment
 import com.example.healthmyusualtime.databinding.FragmentHomeBinding
+import com.example.healthmyusualtime.group.GroupCreate
+import com.example.healthmyusualtime.group.GroupMain
+import com.example.healthmyusualtime.login.Manager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -36,8 +40,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeGroupRV = binding.RVHomeGroup
         groupList = ArrayList<DataGroup>()
-        groupList.add(DataGroup(null,"언더아머수호반","헬스","3:1000이 목표",8))
-        groupList.add(DataGroup(null,"우리동네필라테스","필라테스","우당탕탕 필라테스 도전기",5))
+        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","3:1000이 목표",8))
+        groupList.add(DataGroup(null, null,"우리동네필라테스","필라테스","우당탕탕 필라테스 도전기",5))
         if (groupList.size != 0) {
             binding.noGroup.setVisibility(View.INVISIBLE)
             binding.searchBtn.setVisibility(View.INVISIBLE)
@@ -51,6 +55,10 @@ class HomeFragment : Fragment() {
             mainActivity.changeFragment(
                 SearchGroupFragment()
             )
+        }
+        binding.createBtn.setOnClickListener(){
+            val intent = Intent(context, GroupCreate::class.java)
+            startActivity(intent)
         }
 
         return binding.root

@@ -27,7 +27,6 @@ class HomeGroupAdapter(private val context: Context, private  val datalist: Muta
             val HomeGroupName = itemView.findViewById<TextView>(R.id.HomeGroupName)
             val HomeGroupMember = itemView.findViewById<TextView>(R.id.HomeGroupMember)
             val HomeGroupIntro = itemView.findViewById<TextView>(R.id.HomeGroupIntro)
-
             fun bind(dataGroup: DataGroup, context: Context){
                 if(dataGroup.groupImg != null){
                     val resourceld = context.resources.getIdentifier(dataGroup.groupImg.toString(),"drawavle",context.packageName)
