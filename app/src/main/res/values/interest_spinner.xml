@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="interest_array">
+        <item>헬스</item>
+        <item>필라테스</item>
+        <item>클라이밍</item>
+        <item>요가</item>
+        <item>런닝</item>
+        <item>수영</item>
+    </string-array>
+
+</resources>

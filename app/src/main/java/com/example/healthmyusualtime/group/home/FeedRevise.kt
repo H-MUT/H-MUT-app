@@ -28,7 +28,7 @@ class FeedRevise : AppCompatActivity() {
             val text = binding.reviseContent.text
             val feedId = intent.getIntExtra("feedid",0)
             val gson = GsonBuilder().create()
-            val str = gson.toJson(Datafeed(Manager.information,null,0,text.toString(),null,null,null, null))
+            val str = gson.toJson(Datafeed(Manager.userInfo,null,0,text.toString(),null,null,null, null))
             val okHttpClient = OkHttpClient()
             val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
             val request = Request.Builder()

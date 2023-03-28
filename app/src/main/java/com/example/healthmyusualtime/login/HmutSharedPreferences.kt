@@ -3,31 +3,10 @@ package com.example.healthmyusualtime.login
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import com.example.healthmyusualtime.Information
 
 object HmutSharedPreferences {
     private var myAccount : String = "account"
 
-    fun setUserId(context: Context, input: String){
-        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        val editors : SharedPreferences.Editor = prefs.edit()
-        editors.putString("my_Id", input)
-        editors.commit()
-    }
-    fun getUserId(context: Context) : String {
-        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        return prefs.getString("my_Id", "").toString()
-    }
-    fun setUserPw(context: Context, input: String){
-        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        val editors : SharedPreferences.Editor = prefs.edit()
-        editors.putString("my_Pw", input)
-        editors.commit()
-    }
-    fun getUserPw(context: Context) : String {
-        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        return prefs.getString("my_Pw", "").toString()
-    }
     fun setUserName(context: Context, input: String){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         val editors : SharedPreferences.Editor = prefs.edit()
@@ -38,15 +17,25 @@ object HmutSharedPreferences {
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         return prefs.getString("my_Name", "").toString()
     }
-    fun setUserInterest(context: Context, input: String){
+    fun setUserMainInterest(context: Context, input: String){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         val editors : SharedPreferences.Editor = prefs.edit()
-        editors.putString("my_Interest", input)
+        editors.putString("main_Interest", input)
         editors.commit()
     }
-    fun getUserInterest(context: Context) : String {
+    fun getUserMainInterest(context: Context) : String {
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        return prefs.getString("my_Interest", "").toString()
+        return prefs.getString("main_Interest", "").toString()
+    }
+    fun setUserSubInterest(context: Context, input: String){
+        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
+        val editors : SharedPreferences.Editor = prefs.edit()
+        editors.putString("sub_Interest", input)
+        editors.commit()
+    }
+    fun getUserSubInterest(context: Context) : String {
+        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
+        return prefs.getString("sub_Interest", "").toString()
     }
     fun clearUser(context: Context){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
@@ -67,13 +56,12 @@ object HmutSharedPreferences {
 }
 class Manager(val context: Context){
     companion object{
-        lateinit var information: Information
+        lateinit var userInfo: UserInfo
         fun set(context: Context){
-            information = Information(
-                HmutSharedPreferences.getUserId(context),
-                HmutSharedPreferences.getUserPw(context),
+            userInfo = UserInfo(
                 HmutSharedPreferences.getUserName(context),
-                HmutSharedPreferences.getUserInterest(context),
+                HmutSharedPreferences.getUserMainInterest(context),
+                HmutSharedPreferences.getUserSubInterest(context),
             null)
         }
     }
