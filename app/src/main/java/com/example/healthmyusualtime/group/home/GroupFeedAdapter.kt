@@ -48,7 +48,6 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
         private val Homecontent = itemView.findViewById<TextView>(R.id.FeedContent)
         var LikeNum = itemView.findViewById<TextView>(R.id.likeNum)
         private var Like_btn = itemView.findViewById<LottieAnimationView>(R.id.likebtn)
-        val commentBtn = itemView.findViewById<Button>(R.id.commentbtn)
 
         fun bind(datafeed: Datafeed){
             if(!visible){
@@ -92,24 +91,6 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
                 animator.start()
             }
 
-            commentBtn.setOnClickListener(){
-                val builder = AlertDialog.Builder(context)
-                builder.setTitle("댓글 달기")
-                builder.setIcon(R.mipmap.ic_launcher_round)
-                val v1 = LayoutInflater.from(context).inflate(R.layout.dialog_comment, null)
-                builder.setView(v1)
-
-                val listener = DialogInterface.OnClickListener{ p0, p1 ->
-                    val alert = p0 as AlertDialog
-                    val edit1 : EditText? = alert.findViewById<EditText>(R.id.write_comment)
-                    val comment = edit1?.text.toString()
-                    Log.i("comment", comment)
-                    val commentId = Manager.information.name
-                }
-                builder.setPositiveButton("확인", listener)
-                builder.setNegativeButton("취소", null)
-                builder.show()
-            }
         }
     }
 
@@ -122,18 +103,18 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
         holder.bind(dataList[position])
         Log.d("test",dataList[position].isLiked.toString())
         val like_btn = holder.itemView.findViewById<LottieAnimationView>(R.id.likebtn)
-        val userid = HmutSharedPreferences.getUserId(context)
+        val username = HmutSharedPreferences.getUserName(context)
         val dataHomeFeed = dataList[position]
 
 
         holder.itemView.findViewById<Toolbar>(R.id.Feed_menu_toolbar).setOnMenuItemClickListener(){
             when (it.itemId) {
                 R.id.feed_delete ->
-                    if(userid == dataHomeFeed.writer.userId){
+                    if(username == dataHomeFeed.writer.name){
                         feedDelete(dataHomeFeed)
                     }
                 R.id.feed_revise ->
-                    if(userid == dataHomeFeed.writer.userId){
+                    if(username == dataHomeFeed.writer.name){
                         feedRevise(dataHomeFeed,position)
 
                     }
@@ -219,40 +200,7 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
                 })
             }
         }
-//        comment_btn.setOnClickListener(){
-//            val commentId = Manager.information.userId
-//            var commentcontent = ""
-//            val builder = AlertDialog.Builder(context)
-//            builder.setTitle("댓글 달기")
-//            builder.setIcon(R.mipmap.ic_launcher_round)
 //
-//            val v1 = LayoutInflater.from(context).inflate(R.layout.dialog_comment, null)
-//            builder.setView(v1)
-//
-//            val listener = DialogInterface.OnClickListener{ p0, p1 ->
-//                val alert = p0 as AlertDialog
-//                val edit1 : EditText? = alert.findViewById<EditText>(R.id.write_comment)
-//                val comment = edit1?.text.toString()
-//                Log.i("comment", comment)
-//                commentcontent = comment
-//                var datacomment = DataComment(commentId,commentcontent)
-//                holder.commentList.toMutableList().add(datacomment)
-//                val commentAdapter = CommentAdapter(context, holder.commentList)
-//                holder.itemView.findViewById<RecyclerView>(R.id.comment).adapter = commentAdapter
-//                commentAdapter.notifyDataSetChanged()
-//                holder.commentRV.adapter = commentAdapter
-//            }
-//            builder.setPositiveButton("확인", listener)
-//            builder.setNegativeButton("취소", null)
-//            builder.show()
-//            val commentAdapter = CommentAdapter(context, holder.commentList)
-//            holder.commentRV.adapter = commentAdapter
-//            Log.d("test",holder.commentList[0].comment.toString())
-//
-//
-//
-//        }
-
     }
     override fun getItemCount(): Int {
         return dataList.size

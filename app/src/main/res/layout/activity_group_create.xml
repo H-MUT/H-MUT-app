@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".group.GroupCreate">
+
+    <TextView
+        android:id="@+id/groupInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="그룹 생성"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        />
+
+    <ImageView
+        android:id="@+id/groupImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/hmutlogo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupInfo"
+        />
+
+    <Button
+        android:id="@+id/groupImgbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="프로필 사진"
+        app:layout_constraintLeft_toRightOf="@id/groupInfo"
+        app:layout_constraintTop_toTopOf="@id/groupImage"
+        app:layout_constraintBottom_toBottomOf="@+id/groupImage"
+        android:layout_marginBottom="5dp"
+        />
+
+    <EditText
+        android:id="@+id/inputGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="그룹 이름"
+        android:inputType="text"
+        android:layout_marginTop="40dp"
+        android:ems="13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupImage"
+        />
+
+    <TextView
+        android:id="@+id/text_checkGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
+        app:layout_constraintTop_toBottomOf="@id/inputGroupName"/>
+
+    <Button
+        android:id="@+id/checkGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="중복확인"
+        android:layout_marginStart="20dp"
+        app:layout_constraintLeft_toRightOf="@id/groupInfo"
+        app:layout_constraintBottom_toBottomOf="@id/inputGroupName"
+        android:layout_marginBottom="2dp" />
+
+    <TextView
+        android:id="@+id/inputGroupInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메인 관심사"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
+        app:layout_constraintTop_toBottomOf="@id/inputGroupName"
+        />
+    <Spinner
+        android:id="@+id/groupInter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintLeft_toRightOf="@id/inputGroupInter"
+        app:layout_constraintTop_toTopOf="@id/inputGroupInter"
+        />
+
+    <EditText
+        android:id="@id/groupInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="그룹소개글"
+        android:inputType="text"
+        android:ems="15"
+        app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
+        app:layout_constraintTop_toBottomOf="@id/inputGroupInter"
+        android:layout_marginTop="20dp"
+        />
+    <Button
+        android:id="@+id/groupComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="50dp"
+        android:text="완료"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Button
+        android:id="@+id/groupInfoCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="돌아가기"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

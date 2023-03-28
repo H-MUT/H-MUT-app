@@ -1,10 +1,10 @@
 package com.example.healthmyusualtime.group.home
 
-import com.example.healthmyusualtime.Information
 import com.example.healthmyusualtime.login.Manager
+import com.example.healthmyusualtime.login.UserInfo
 
 class Datafeed (
-    val writer: Information = Information("","",Manager.information.name,null,null),
+    val writer: UserInfo = UserInfo(Manager.userInfo.name,null,null,null),
     val contentImg : ByteArray?,
     var likeNum: Int = 0,
     val content : String?,

@@ -59,22 +59,13 @@
         />
 
     <!--좋아요 버튼-->
-    <Button
-        android:id="@+id/commentbtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toBottomOf="@id/FeedContentImg"
-        app:layout_constraintStart_toEndOf="@id/likebtn"
-        android:layout_margin="10dp"/>
-<!--    app:layout_constraintStart_toEndOf="@id/likebtn"-->
-
-    <!-- 댓글달기 버튼-->
+정
     <TextView
         android:id="@+id/likecount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/commentbtn"
+        app:layout_constraintTop_toBottomOf="@id/likebtn"
         android:text="받은 Like의 수 :"
         android:layout_margin="10dp"
         />
@@ -83,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/likecount"
-        app:layout_constraintTop_toBottomOf="@+id/commentbtn"
+        app:layout_constraintTop_toBottomOf="@+id/likebtn"
         android:text="0"
         android:layout_margin="10dp"
         />
