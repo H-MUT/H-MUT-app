@@ -1,8 +1,11 @@
 package com.example.healthmyusualtime.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.Paint
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,9 +13,16 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.net.toUri
+import com.example.healthmyusualtime.Login
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.databinding.ActivityUserInformationBinding
+import com.example.healthmyusualtime.group.GroupMain
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,20 +30,25 @@ import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.http.Url
 import java.io.IOException
 import java.util.regex.Pattern
 
 class UserInformation : AppCompatActivity() {
     private val GALLERY = 1
     lateinit var binding: ActivityUserInformationBinding
-    lateinit var openGalleryBtn : Button
     lateinit var UserImg : ImageView
-    var bitmap : Bitmap? = null
     private val namePattern1 = "^[가-힣]{2,8}$"
     //한글로만 이루어진 닉네임 정규 표현식
-    private val namePattern2 ="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,12})\$"
+    private val namePattern2 ="^(?=\\D)[a-zA-Z0-9]{2,12}\$"
     // 영문자, 숫자로만 이루어진 닉네임 정규 표현식
+
+    // 한글 + 숫자 조합으로 정규식 2~10 챗지피티한테 물어보기
     var checkName_finsih = false
+    var interList = ArrayList<String>()
+    var buttonList = ArrayList<Button>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,25 +57,14 @@ class UserInformation : AppCompatActivity() {
 
         setViews()
 
-        openGalleryBtn.setOnClickListener{
+        UserImg.setOnClickListener{
             openGallery()
         }
 
-        val mainSpinner: Spinner = binding.mainInter
-        val subSpinner: Spinner = binding.subInter
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.interest_array, android.R.layout.simple_spinner_dropdown_item
-        ).also{
-                adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            mainSpinner.adapter = adapter
-            subSpinner.adapter = adapter
-        }
 
         binding.checkName.setOnClickListener {
             val userName = binding.inputName.text.toString()
-            val information = UserInfo(userName,"","",null)
+            val information = UserInfo(userName,null,null)
             postCheckName(information)
 
             binding.inputName.addTextChangedListener(object : TextWatcher {
@@ -77,59 +81,53 @@ class UserInformation : AppCompatActivity() {
             })
         }
 
-        binding.UserInfoComplete.setOnClickListener{
-            if(checkName_finsih == true) {
-                val userName = binding.inputName.getText().toString()
-                val mainInterest = mainSpinner.toString()
-                val subInterest = subSpinner.toString()
-                val information = UserInfo(userName, mainInterest, subInterest, null)
-                // 유저 이미지 받아온거 저장을 해야되는데 흠...
-                Log.d("information",information.toString())
-                postUser(information)
-            }else if(checkName_finsih == true) {
-                Toast.makeText(applicationContext,"닉네임 중복확인을 해주세요",Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(applicationContext,"가입 조건에 맞게 입력해 주세요",Toast.LENGTH_SHORT).show()
-            }
+        binding.UserInfoNext.setOnClickListener{
+            val userName = binding.inputName.getText().toString()
+            val intent = Intent(this, UserInterset::class.java)
+            intent.putExtra("name",userName)
+            startActivity(intent)
+//            if(checkName_finsih == true) {
+//            val intent = Intent(this, UserInterset::class.java)
+//            intent.putExtra("name",userName)
+//            intent.putExtra("uri",imageuri)
+//            startActivity(intent)
+//                val userName = binding.inputName.getText().toString()
+//                val imageuri = HmutSharedPreferences.getUserImageUrl(this).toUri()
+//                val information = UserInfo(userName, interList, imageuri)
+//                Log.d("information",information.toString())
+////                postUser(information)
+//            }else if(checkName_finsih == true) {
+//                Toast.makeText(applicationContext,"닉네임 중복확인을 해주세요",Toast.LENGTH_SHORT).show()
+//            }
+//            else{
+//                Toast.makeText(applicationContext,"가입 조건에 맞게 입력해 주세요",Toast.LENGTH_SHORT).show()
+//            }
+        }
+
+        binding.UserInfoCancel.setOnClickListener(){
+            finish()
         }
 
     }
 
     fun setViews(){
-        openGalleryBtn = binding.profilebtn
         UserImg = binding.profileImage
     }
-
     fun openGallery(){
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.setType("image/*")
-        startActivityForResult(intent,GALLERY)
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLERY)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if(resultCode == Activity.RESULT_OK){
-            if( requestCode ==  GALLERY)
-            {
-                val imageData: Uri? = data?.data
-                Toast.makeText(this,imageData.toString(), Toast.LENGTH_LONG ).show()
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageData)
-                    if(bitmap == null){
-                        UserImg.setImageResource(R.mipmap.hmutlogo_round)
-                    }
-                    else{
-                        UserImg.setImageBitmap(bitmap)
-                    }
-                }
-                catch (e:Exception)
-                {
-                    e.printStackTrace()
-                }
-            }
+        if (requestCode == GALLERY && resultCode == RESULT_OK && data != null) {
+            val imageUri = data.data // 선택된 이미지의 URI
+            // 이미지 처리 작업을 수행합니다.
+            UserImg.setImageURI(imageUri)
+            HmutSharedPreferences.setUserImageUrl(this,imageUri.toString()) // 유저 이미지 저장
         }
+
     }
 
     fun patternCheckName(id : String) :Boolean {
@@ -144,7 +142,7 @@ class UserInformation : AppCompatActivity() {
         val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
         val request = Request.Builder()
             .method("POST", requestBody)
-            .url("주소")
+            .url("")
             .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -183,39 +181,14 @@ class UserInformation : AppCompatActivity() {
         })
     }
 
-    fun postUser(information: UserInfo) {
-        val gson = GsonBuilder().create()
-        val str = gson.toJson(information)
-        val okHttpClient = OkHttpClient()
-        val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
-        val request = Request.Builder()
-            .method("POST", requestBody)
-            .url("")
-            .build()
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                CoroutineScope(Dispatchers.Main).launch{
-                    Toast.makeText(applicationContext,"실패",Toast.LENGTH_SHORT).show()
-                }
-                Log.e("fail",e.message.toString())
-                Log.e("fail",e.toString())
-            }
-            override fun onResponse(call: Call, response: Response) {
-                if(response.isSuccessful) {
-                    Log.i("Success", response.message)
-                    Log.i("Success", response.toString())
-                    finish()
-                }
-                else{
-                    Log.e("connection error",response.body.toString())
-                }
-            }
-        })
+    override fun onRestart() {
+        super.onRestart()
+        if(HmutSharedPreferences.getUserName(this).isNotBlank())
+            finish()
     }
 }
 
 data class UserInfo(var name: String?,
-                    var mainInter: String?,
-                    var subInter: String?,
-                    var userImage : ByteArray?) {
+                    var inter : List<String>?,
+                    var userImage : Uri?) {
 }

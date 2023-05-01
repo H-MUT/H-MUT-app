@@ -16,4 +16,35 @@
         app:layout_constraintRight_toRightOf="parent"
         android:text="검색 프래그먼트" />
 
+    <GridLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        android:columnCount="2"
+        android:rowCount="1">
+
+        <Button
+            android:gravity="center"
+            android:id="@+id/inter_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/searchview"
+            android:layout_columnWeight="1"
+            />
+
+    </GridLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_Group_List"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/search"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/rv_serachgroup"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

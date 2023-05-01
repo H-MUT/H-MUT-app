@@ -40,18 +40,17 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeGroupRV = binding.RVHomeGroup
         groupList = ArrayList<DataGroup>()
-        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","3:1000이 목표",8))
-        groupList.add(DataGroup(null, null,"우리동네필라테스","필라테스","우당탕탕 필라테스 도전기",5))
+        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","매일","3:1000이 목표","너무좋아요",8))
+        groupList.add(DataGroup(null, null,"우리동네필라테스","필라테스","매일","우당탕탕 필라테스 도전기","너무좋아요",5))
         if (groupList.size != 0) {
             binding.noGroup.setVisibility(View.INVISIBLE)
             binding.searchBtn.setVisibility(View.INVISIBLE)
         }
         val homeGroupRVAdapter = HomeGroupAdapter(mainActivity, groupList.toMutableList())
+
+
         homeGroupRV.adapter = homeGroupRVAdapter
-        // Inflate the layout for this fragment
         binding.searchBtn.setOnClickListener(){
-            mainActivity.findViewById<BottomNavigationView>(R.id.bottom_bar).itemIconTintList = ContextCompat.getColorStateList(mainActivity, R.color.color_search_group)
-            mainActivity.findViewById<BottomNavigationView>(R.id.bottom_bar).itemTextColor  = ContextCompat.getColorStateList(mainActivity, R.color.color_search_group)
             mainActivity.changeFragment(
                 SearchGroupFragment()
             )

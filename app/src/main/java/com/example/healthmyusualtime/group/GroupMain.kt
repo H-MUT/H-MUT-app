@@ -6,11 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.healthmyusualtime.R
-import com.example.healthmyusualtime.SearchGroupFragment
-import com.example.healthmyusualtime.UserFragment
 import com.example.healthmyusualtime.databinding.ActivityGroupMainBinding
-import com.example.healthmyusualtime.home.HomeFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class GroupMain : AppCompatActivity() {
     lateinit var binding: ActivityGroupMainBinding

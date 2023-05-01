@@ -25,22 +25,15 @@
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:src="@mipmap/hmutlogo"
+        android:background="@drawable/shadow"
+        android:elevation="8dp"
+        android:scaleType="centerCrop"
+        android:clickable="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/groupInfo"
         />
 
-    <Button
-        android:id="@+id/groupImgbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="프로필 사진"
-        app:layout_constraintLeft_toRightOf="@id/groupInfo"
-        app:layout_constraintTop_toTopOf="@id/groupImage"
-        app:layout_constraintBottom_toBottomOf="@+id/groupImage"
-        android:layout_marginBottom="5dp"
-        />
 
     <EditText
         android:id="@+id/inputGroupName"
@@ -78,7 +71,7 @@
         android:id="@+id/inputGroupInter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="메인 관심사"
+        android:text="그룹 설정"
         android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
         app:layout_constraintTop_toBottomOf="@id/inputGroupName"
@@ -93,15 +86,36 @@
         app:layout_constraintTop_toTopOf="@id/inputGroupInter"
         />
 
-    <EditText
-        android:id="@id/groupInfoText"
+    <Spinner
+        android:id="@+id/groupfrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="그룹소개글"
+        android:layout_marginStart="10dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintLeft_toRightOf="@id/groupInter"
+        app:layout_constraintTop_toTopOf="@id/inputGroupInter"
+        />
+
+    <EditText
+        android:id="@+id/groupInfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="한줄 소개"
         android:inputType="text"
         android:ems="15"
         app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
         app:layout_constraintTop_toBottomOf="@id/inputGroupInter"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:id="@+id/groupInfolongText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="메인 소개글"
+        android:inputType="text"
+        android:ems="15"
+        app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
+        app:layout_constraintTop_toBottomOf="@id/groupInfoText"
         android:layout_marginTop="20dp"
         />
     <Button
@@ -111,6 +125,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="50dp"
         android:text="완료"
+        android:background="@drawable/round_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
@@ -122,6 +137,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginBottom="30dp"
         android:text="돌아가기"
+        android:background="@drawable/round_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />

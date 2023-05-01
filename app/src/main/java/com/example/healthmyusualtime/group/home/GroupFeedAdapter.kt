@@ -54,9 +54,7 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
                 itemView.findViewById<Toolbar>(R.id.Feed_menu_toolbar).visibility = View.GONE
             }
             if(datafeed.writer.userImage !=null){
-                val byteImg = datafeed.writer.userImage
-                val bitmap = byteImg?.let { BitmapFactory.decodeByteArray(byteImg,0, it.size) }
-                Homeuserimg.setImageBitmap(bitmap)
+                Homeuserimg.setImageURI(datafeed.writer.userImage)
             }
             else{
                 Homeuserimg.setImageResource(R.mipmap.ic_launcher_round)

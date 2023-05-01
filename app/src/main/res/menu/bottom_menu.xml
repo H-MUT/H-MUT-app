@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="홈"
+        android:title=""
+        android:icon="@drawable/home"
         android:enabled="true"
         android:id="@+id/menu_home"
         />
     <item
-        android:title="검색"
+        android:title=""
+        android:icon="@drawable/search"
         android:enabled="true"
         android:id="@+id/menu_group_search"
         />
     <item
-        android:title="프로필"
+        android:title="설정"
         android:enabled="true"
         android:id="@+id/menu_profile"
         />

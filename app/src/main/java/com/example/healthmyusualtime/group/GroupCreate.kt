@@ -3,16 +3,22 @@ package com.example.healthmyusualtime.group
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.databinding.ActivityGroupCreateBinding
 import com.example.healthmyusualtime.login.HmutSharedPreferences
+import com.example.healthmyusualtime.login.UserInformation
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,12 +29,14 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 class GroupCreate : AppCompatActivity() {
+
     lateinit var binding : ActivityGroupCreateBinding
+    var imageUri : Uri? = null
     private val GALLERY = 1
-    lateinit var GroupImg : ImageView
-    var bitmap : Bitmap? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("test","그룹 페이지")
         super.onCreate(savedInstanceState)
         binding = ActivityGroupCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -36,7 +44,8 @@ class GroupCreate : AppCompatActivity() {
         binding.groupInfoCancel.setOnClickListener(){
             finish()
         }
-        binding.groupImgbtn.setOnClickListener(){
+
+        binding.groupImage.setOnClickListener(){
             openGallery()
         }
         binding.groupComplete.setOnClickListener(){
@@ -45,39 +54,48 @@ class GroupCreate : AppCompatActivity() {
             val groupInfo = binding.groupInfoText.text.toString()
             val groupManager = HmutSharedPreferences.getUserName(application)
             val groupMem = 1
+            val groupfrequency = binding.groupfrequency.selectedItem.toString()
+            val groupLongInfo = binding.groupInfolongText.toString()
             val groupImg = binding.groupImage.toString()
-            val dataGroup = DataGroup(groupImg,groupManager,groupName,interest,groupInfo,groupMem)
+            val dataGroup = DataGroup(groupImg,groupManager,groupName,interest,groupfrequency,groupInfo,groupLongInfo,groupMem)
             addGroup(dataGroup)
+        }
+
+        val GroupSpinner: Spinner = binding.groupInter
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.interest_array, android.R.layout.simple_spinner_dropdown_item
+        ).also{
+                adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            GroupSpinner.adapter = adapter
+        }
+        val TimeSpinner: Spinner = binding.groupfrequency
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.frequency_array, android.R.layout.simple_spinner_dropdown_item
+        ).also{
+                adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            TimeSpinner.adapter = adapter
         }
 
     }
     fun openGallery(){
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.setType("image/*")
-        startActivityForResult(intent,GALLERY)
+//        val intent = Intent(Intent.ACTION_GET_CONTENT)
+//        intent.setType("image/*")
+//        startActivityForResult(intent,GALLERY)
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, GALLERY)
+        Log.d("test","갤러리 오픈")
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if(resultCode == Activity.RESULT_OK){
-            if( requestCode ==  GALLERY)
-            {
-                val imageData: Uri? = data?.data
-                Toast.makeText(this,imageData.toString(), Toast.LENGTH_LONG ).show()
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageData)
-                    if(bitmap == null){
-                        GroupImg.setImageResource(R.mipmap.hmutlogo_round)
-                    }
-                    else{
-                        GroupImg.setImageBitmap(bitmap)
-                    }
-                }
-                catch (e:Exception)
-                {
-                    e.printStackTrace()
-                }
-            }
+        Log.d("test","갤러리 이미지 선택")
+        if (requestCode == GALLERY && resultCode == RESULT_OK && data != null) {
+            imageUri = data.data!!
+            Log.d("test",imageUri.toString())
+            binding.groupImage.setImageURI(imageUri)
         }
     }
 
