@@ -17,25 +17,36 @@ object HmutSharedPreferences {
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         return prefs.getString("my_Name", "").toString()
     }
-    fun setUserMainInterest(context: Context, input: String){
+    fun setUserInterest(context: Context, input: List<String>){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         val editors : SharedPreferences.Editor = prefs.edit()
-        editors.putString("main_Interest", input)
-        editors.commit()
+        for(i in input.indices) {
+            val key = "Interest" + (i + 1)
+            editors.putString(key, input[i])
+        }
+        editors.apply()
     }
-    fun getUserMainInterest(context: Context) : String {
-        val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        return prefs.getString("main_Interest", "").toString()
+    fun getUserInterest(context: Context): List<String> {
+        val prefs: SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
+        val interestList = mutableListOf<String>()
+        var i = 1
+        var inter = prefs.getString("Interest$i", null)
+        while (inter != null) {
+            interestList.add(inter)
+            i++
+            inter = prefs.getString("Interest$i", null)
+        }
+        return interestList
     }
-    fun setUserSubInterest(context: Context, input: String){
+    fun setUserImageUrl(context: Context, input: String){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
         val editors : SharedPreferences.Editor = prefs.edit()
-        editors.putString("sub_Interest", input)
+        editors.putString("imageUrl", input)
         editors.commit()
     }
-    fun getUserSubInterest(context: Context) : String {
+    fun getUserImageUrl(context: Context) : String {
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
-        return prefs.getString("sub_Interest", "").toString()
+        return prefs.getString("imageUrl", "").toString()
     }
     fun clearUser(context: Context){
         val prefs : SharedPreferences = context.getSharedPreferences(myAccount, Context.MODE_PRIVATE)
@@ -51,7 +62,7 @@ object HmutSharedPreferences {
         editor.remove("my_Pw")
         editor.commit()
     }
-
+    // 회원탈퇴
 
 }
 class Manager(val context: Context){
@@ -60,8 +71,7 @@ class Manager(val context: Context){
         fun set(context: Context){
             userInfo = UserInfo(
                 HmutSharedPreferences.getUserName(context),
-                HmutSharedPreferences.getUserMainInterest(context),
-                HmutSharedPreferences.getUserSubInterest(context),
+                null,
             null)
         }
     }

@@ -27,7 +27,9 @@ class HomeGroupAdapter(private val context: Context, private  val datalist: Muta
             val HomeGroupName = itemView.findViewById<TextView>(R.id.HomeGroupName)
             val HomeGroupMember = itemView.findViewById<TextView>(R.id.HomeGroupMember)
             val HomeGroupIntro = itemView.findViewById<TextView>(R.id.HomeGroupIntro)
-            fun bind(dataGroup: DataGroup, context: Context){
+            val HomeGroupFre = itemView.findViewById<TextView>(R.id.HomeGroupFrequncy)
+            val HomeGroupInter = itemView.findViewById<TextView>(R.id.HomeGroupInter)
+        fun bind(dataGroup: DataGroup, context: Context){
                 if(dataGroup.groupImg != null){
                     val resourceld = context.resources.getIdentifier(dataGroup.groupImg.toString(),"drawavle",context.packageName)
                     if(resourceld > 0)
@@ -40,14 +42,14 @@ class HomeGroupAdapter(private val context: Context, private  val datalist: Muta
                 HomeGroupIntro.text = dataGroup.groupIntro
                 HomeGroupMember.text = dataGroup.groupMember.toString()
                 HomeGroupName.text = dataGroup.groupName
+                HomeGroupFre.text = "#${dataGroup.groupfrequency}"
+                HomeGroupInter.text  = "#${dataGroup.groupField}"
+
                 itemView.setOnClickListener(){
                     val intent = Intent(context, GroupMain::class.java) // 테스트 해보는거 그룹으로 넘어감
                     intent.putExtra("groupName",dataGroup.groupName)
                     context.startActivity(intent)
                 }
-//                itemView.setOnLongClickListener(){
-//                    꾹눌렀을때 이제 그룹나가기? 이런느낌을 추가하기?
-//                }
             }
 
         }
