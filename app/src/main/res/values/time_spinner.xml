@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="frequency_array">
+        <item>매일</item>
+        <item>주 1회</item>
+        <item>주 2회</item>
+        <item>달 1회</item>
+    </string-array>
+</resources>
