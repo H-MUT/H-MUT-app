@@ -1,5 +1,6 @@
 package com.example.healthmyusualtime
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -28,13 +29,7 @@ class Login : AppCompatActivity() {
 
         val btn = binding.loginBtn
         val kakaobtn = binding.kakaoSignUp
-//        if(HmutSharedPreferences.getUserName(this).isNullOrBlank()) {
-//            Login()             // 저장된 로그인 값이 없을 때
-//        }
-//        else {                  // 저장된 로그인 값이 있을 때 --> loginActivity 종료
-//            finish()
-//        }
-        //서버 통신하면 살릴거
+
         btn.setOnClickListener(){
             finish()
         }
@@ -56,7 +51,8 @@ class Login : AppCompatActivity() {
                 if(HmutSharedPreferences.getUserName(this).isNullOrBlank()){ // 저장된 로그인 값이 없을 때
                     val intent = Intent(applicationContext, UserInformation::class.java)
                     startActivity(intent)
-                    finish()
+                    if(HmutSharedPreferences.getUserName(this).isNotBlank())
+                        finish()
                 }
                 else {
                     finish()
@@ -84,7 +80,8 @@ class Login : AppCompatActivity() {
                     if(HmutSharedPreferences.getUserName(this).isNullOrBlank()){ // 저장된 로그인 값이 없을 때
                         val intent = Intent(applicationContext, UserInformation::class.java)
                         startActivity(intent)
-                        finish()
+                        if(HmutSharedPreferences.getUserName(this).isNotBlank())
+                            finish()
                     }
                     else {
                         finish()
@@ -105,4 +102,5 @@ class Login : AppCompatActivity() {
             Toast.makeText(applicationContext, "뒤로가기를 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
