@@ -26,7 +26,7 @@ class GroupSearchListAdapter(private val context: Context, private  val datalist
         val Tag = itemView.findViewById<TextView>(R.id.tag)
 
         fun bind(dataSearchGroup: DataSearchGroup, context: Context){
-            Tag.text = dataSearchGroup.title
+            Tag.text = "#${dataSearchGroup.title}"
             GroupList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             val adapter = GroupSearchAdapter(context, dataSearchGroup.groupList.toMutableList())
             GroupList.adapter = adapter
@@ -35,7 +35,7 @@ class GroupSearchListAdapter(private val context: Context, private  val datalist
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.rv_serachgroup,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.rv_searchgrouplist,parent,false)
         return ItemViewHolder(view)
     }
 
