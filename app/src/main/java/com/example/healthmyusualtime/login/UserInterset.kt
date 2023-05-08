@@ -4,10 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import com.example.healthmyusualtime.Login
+import com.example.healthmyusualtime.R
+import com.example.healthmyusualtime.R.drawable
 import com.example.healthmyusualtime.databinding.ActivityUserIntersetBinding
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -69,6 +74,7 @@ class UserInterset : AppCompatActivity() {
 
             // 버튼 추가
             val newButton = Button(this)
+            newButton.setBackgroundResource(R.drawable.round_button)
             buttonList.add(newButton)
             newButton.text = tmpList[i]
             newButton.layoutParams = LinearLayout.LayoutParams(
@@ -95,9 +101,12 @@ class UserInterset : AppCompatActivity() {
             }
             // 선택된 버튼의 값을 interlist에 추가
             interList.add(button.text.toString())
+            button.setBackgroundResource(R.drawable.select_button)
+
         } else {
             // 선택 취소된 버튼의 값을 interlist에서 제거
             interList.remove(button.text.toString())
+            button.setBackgroundResource(R.drawable.round_button)
         }
     }
 
