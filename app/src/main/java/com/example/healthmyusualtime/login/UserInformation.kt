@@ -189,6 +189,6 @@ class UserInformation : AppCompatActivity() {
 }
 
 data class UserInfo(var name: String?,
-                    var inter : List<String>?,
+                    var interest : List<String>?,
                     var userImage : Uri?) {
 }
