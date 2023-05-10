@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".group.GroupCreate">
 
     <TextView
@@ -102,7 +108,7 @@
         android:layout_height="wrap_content"
         android:hint="한줄 소개"
         android:inputType="text"
-        android:ems="15"
+        android:ems="14"
         app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
         app:layout_constraintTop_toBottomOf="@id/inputGroupInter"
         android:layout_marginTop="20dp"
@@ -112,8 +118,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="메인 소개글"
-        android:inputType="text"
-        android:ems="15"
+        android:inputType="textMultiLine"
+        android:ems="14"
         app:layout_constraintLeft_toLeftOf="@id/inputGroupName"
         app:layout_constraintTop_toBottomOf="@id/groupInfoText"
         android:layout_marginTop="20dp"
@@ -122,12 +128,13 @@
         android:id="@+id/groupComplete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="50dp"
         android:text="완료"
         android:background="@drawable/round_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupInfolongText"
         />
 
     <Button
@@ -135,12 +142,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:text="돌아가기"
         android:background="@drawable/round_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupInfolongText"
         />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

@@ -6,22 +6,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SearchGroupFragment">
 
-    <Button
+<!--    <Button-->
+<!--        android:id="@+id/inter_search"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:background="@drawable/searchview"-->
+<!--        />-->
+    <SearchView
         android:id="@+id/inter_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/searchview"
         />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Group_List"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/inter_search"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintVertical_bias="1.0"
+        android:layout_marginBottom="40dp"
         tools:listitem="@layout/rv_searchgrouplist"
         />
 

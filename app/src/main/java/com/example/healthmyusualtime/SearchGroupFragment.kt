@@ -68,38 +68,3 @@ class SearchGroupFragment : Fragment() {
     }
 
 }
-//groupRecyclerView = binding.RVGroupList
-//groupList = ArrayList<DataGroup>()
-//groupList.add(DataGroup(null, null,"league of legend","헬스","매일","챌린저 가는 그날까지","우리는 너무 행복해요",2))
-//
-//val homeGroupRVAdapter = HomeGroupAdapter(mainActivity, groupList.toMutableList())
-//groupRecyclerView.adapter = homeGroupRVAdapter
-//val tag = HmutSharedPreferences.getUserInterest(requireContext())
-////        val groupRVAdapter = HomeGroupAdapter(requireContext(),model.loadGroup(tag).toMutableList())
-////        groupRecyclerView.adapter = groupRVAdapter
-//
-//binding.interSearch.setOnClickListener(){
-//
-//    val builder = AlertDialog.Builder(requireContext())
-//    builder.setTitle("관심사 선택")
-//    builder.setIcon(R.mipmap.hmutlogo_round)
-//
-//    val spinner = Spinner(requireContext())
-//    val options = resources.getStringArray(R.array.interest_array)
-//    val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options)
-//    spinner.adapter = adapter
-//
-//    builder.setView(spinner)
-//
-//    builder.setPositiveButton("OK") { dialog, which ->
-//        val selectedItem = spinner.selectedItem.toString()
-//        Log.d("test", selectedItem)
-////                val groupRVAdapter = HomeGroupAdapter(requireContext(),model.loadGroup(selectedItem).toMutableList())
-////                CoroutineScope(Dispatchers.Main).launch{
-////                    groupRecyclerView.adapter = groupRVAdapter
-////                }
-//    }
-//
-//    val dialog = builder.create()
-//    dialog.show()
-//}

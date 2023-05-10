@@ -82,9 +82,6 @@ class GroupCreate : AppCompatActivity() {
 
     }
     fun openGallery(){
-//        val intent = Intent(Intent.ACTION_GET_CONTENT)
-//        intent.setType("image/*")
-//        startActivityForResult(intent,GALLERY)
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, GALLERY)
         Log.d("test","갤러리 오픈")
