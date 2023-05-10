@@ -15,8 +15,11 @@
         android:icon="@mipmap/hmutlogo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Healthmyusualtime"
+        android:theme="@style/Theme.Healthmyusualtime.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".group.search.GroupIntro"
+            android:exported="false" />
         <activity
             android:name=".login.WelcomeUser"
             android:exported="false" />
