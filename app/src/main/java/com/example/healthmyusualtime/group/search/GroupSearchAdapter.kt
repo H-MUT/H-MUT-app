@@ -1,6 +1,7 @@
 package com.example.healthmyusualtime.group.search
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.group.DataGroup
+import com.example.healthmyusualtime.group.GroupCreate
+import com.example.healthmyusualtime.group.GroupMain
 
 
 class GroupSearchAdapter(private val context: Context, private  val datalist: MutableList<DataGroup>):
@@ -38,7 +41,15 @@ class GroupSearchAdapter(private val context: Context, private  val datalist: Mu
                 SearchGroupImg.setImageResource(R.mipmap.ic_launcher_round)
             SearchGroupName.text = dataGroup.groupName
             SearchGroupIntro.text = dataGroup.groupIntro
+
+            itemView.setOnClickListener(){
+                val intent = Intent(context, GroupIntro::class.java) // 테스트 해보는거 그룹으로 넘어감
+                intent.putExtra("imageuri",dataGroup.groupImg)
+                intent.putExtra("name",dataGroup.groupName)
+                context.startActivity(intent)
+            }
         }
+
 
     }
 
