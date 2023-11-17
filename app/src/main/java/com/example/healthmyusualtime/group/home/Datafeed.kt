@@ -4,7 +4,7 @@ import com.example.healthmyusualtime.login.Manager
 import com.example.healthmyusualtime.login.UserInfo
 
 class Datafeed (
-    val writer: UserInfo = UserInfo(Manager.userInfo.name,null,Manager.userInfo.userImage),
+    val writer: UserInfo = UserInfo(null,Manager.userInfo.profileImage,Manager.userInfo.name,null),
     val contentImg : ByteArray?,
     var likeNum: Int = 0,
     val content : String?,

@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.databinding.ActivityGroupCreateBinding
@@ -33,12 +34,14 @@ class GroupCreate : AppCompatActivity() {
     lateinit var binding : ActivityGroupCreateBinding
     var imageUri : Uri? = null
     private val GALLERY = 1
+    var checkName_finish : Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("test","그룹 페이지")
         super.onCreate(savedInstanceState)
         binding = ActivityGroupCreateBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         binding.groupInfoCancel.setOnClickListener(){
@@ -48,6 +51,11 @@ class GroupCreate : AppCompatActivity() {
         binding.groupImage.setOnClickListener(){
             openGallery()
         }
+        binding.checkGroupName.setOnClickListener(){
+            val groupName = binding.inputGroupName.text.toString()
+            checkGroupName(groupName)
+        }
+
         binding.groupComplete.setOnClickListener(){
             val interest = binding.groupInter.selectedItem.toString()
             val groupName = binding.inputGroupName.text.toString()
@@ -56,9 +64,12 @@ class GroupCreate : AppCompatActivity() {
             val groupMem = 1
             val groupfrequency = binding.groupfrequency.selectedItem.toString()
             val groupLongInfo = binding.groupInfolongText.toString()
-            val groupImg = binding.groupImage.toString()
-            val dataGroup = DataGroup(groupImg,groupManager,groupName,interest,groupfrequency,groupInfo,groupLongInfo,groupMem)
+            val groupImg = binding.groupImage.toString().toUri()
+            val dataGroup = DataGroup(groupImg,groupManager,groupName,interest,groupfrequency,groupInfo,groupLongInfo,groupMem,null)
             addGroup(dataGroup)
+//            if(checkName_finish == true){
+//                addGroup(dataGroup)
+//            }
         }
 
         val GroupSpinner: Spinner = binding.groupInter
@@ -103,7 +114,7 @@ class GroupCreate : AppCompatActivity() {
         val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
         val request = Request.Builder()
             .method("POST", requestBody)
-            .url("")
+            .url("http://3.36.163.92/api/groups")
             .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -128,6 +139,36 @@ class GroupCreate : AppCompatActivity() {
                     CoroutineScope(Dispatchers.Main).launch{
                         Toast.makeText(applicationContext,"Fail to connection",Toast.LENGTH_SHORT).show()
                     }
+                }
+            }
+        })
+    }
+    fun checkGroupName(name: String){
+        val gson = GsonBuilder().create()
+        val str = gson.toJson(name)
+        val okHttpClient = OkHttpClient()
+        val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
+        val request = Request.Builder()
+            .method("GET", requestBody)
+            .url("http://3.36.163.92/api/groups/check-name")
+            .build()
+        okHttpClient.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                CoroutineScope(Dispatchers.Main).launch{
+                    Toast.makeText(applicationContext,"연결 실패",Toast.LENGTH_SHORT).show()
+                }
+                Log.e("fail",e.message.toString())
+                Log.e("fail",e.toString())
+            }
+            override fun onResponse(call: Call, response: Response) {
+                if(response.isSuccessful) {
+                    Log.i("Success", response.message)
+                    Log.i("Success", response.toString())
+                    checkName_finish = true
+                }
+                else{
+                    Log.e("connection error",response.body.toString())
+                    checkName_finish = false
                 }
             }
         })

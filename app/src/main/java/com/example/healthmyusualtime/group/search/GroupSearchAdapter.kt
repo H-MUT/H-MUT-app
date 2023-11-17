@@ -30,22 +30,23 @@ class GroupSearchAdapter(private val context: Context, private  val datalist: Mu
         val SearchGroupIntro = itemView.findViewById<TextView>(R.id.searchintro)
 
         fun bind(dataGroup: DataGroup, context: Context){
-            if(dataGroup.groupImg != null){
-                val resourceld = context.resources.getIdentifier(dataGroup.groupImg.toString(),"drawavle",context.packageName)
+            if(dataGroup.imageUrl != null){
+                val resourceld = context.resources.getIdentifier(dataGroup.imageUrl.toString(),"drawavle",context.packageName)
                 if(resourceld > 0)
                     SearchGroupImg.setImageResource(resourceld)
                 else
-                    SearchGroupImg.setImageResource(R.mipmap.ic_launcher_round)
+                    SearchGroupImg.setImageResource(R.drawable.img_1)
             }
             else
-                SearchGroupImg.setImageResource(R.mipmap.ic_launcher_round)
+                SearchGroupImg.setImageResource(R.drawable.img_1)
             SearchGroupName.text = dataGroup.groupName
-            SearchGroupIntro.text = dataGroup.groupIntro
+            SearchGroupIntro.text = dataGroup.introduceMessage
 
             itemView.setOnClickListener(){
                 val intent = Intent(context, GroupIntro::class.java) // 테스트 해보는거 그룹으로 넘어감
-                intent.putExtra("imageuri",dataGroup.groupImg)
+                intent.putExtra("imageuri",dataGroup.imageUrl)
                 intent.putExtra("name",dataGroup.groupName)
+                intent.putExtra("groupid",dataGroup.groupId)
                 context.startActivity(intent)
             }
         }

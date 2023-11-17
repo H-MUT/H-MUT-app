@@ -18,7 +18,7 @@ class WelcomeUser : AppCompatActivity() {
         binding.start.setOnClickListener(){
             finish()
         }
-        binding.welcome.text = "${HmutSharedPreferences.getUserName(this)}님, \nHMUT에\n오신것을 환영합니다."
+        binding.welcome.text = "${HmutSharedPreferences.getUserName(this)}김원진님, \nHMUT에\n오신것을 환영합니다."
         setContentView(binding.root)
     }
 }

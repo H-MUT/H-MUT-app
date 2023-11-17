@@ -14,13 +14,20 @@ import com.example.healthmyusualtime.Login
 import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.R.drawable
 import com.example.healthmyusualtime.databinding.ActivityUserIntersetBinding
+import com.example.healthmyusualtime.retrorit.PostUser
+import com.example.healthmyusualtime.retrorit.Token
+import com.example.healthmyusualtime.retrorit.UserService
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.kakao.sdk.user.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class UserInterset : AppCompatActivity() {
@@ -28,10 +35,10 @@ class UserInterset : AppCompatActivity() {
     val MAX_SELECTION = 3
     var interList = ArrayList<String>()
     var buttonList = ArrayList<Button>()
-
+    lateinit var api : UserService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        api = UserService.create()
         binding = ActivityUserIntersetBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setViews()
@@ -41,9 +48,16 @@ class UserInterset : AppCompatActivity() {
         }
 
         binding.UserInfoComplete.setOnClickListener(){
+            val image = HmutSharedPreferences.getUserImageUrl(this)
+            var username = intent.getStringExtra("name")!!
+            val tag = ArrayList<String>()
+            tag.add("YOGA")
+            tag.add("CYCLE")
+            var information = UserInfo("a@naver.com",image,username,tag)
+            postUser(information)
             val intent = Intent(this, WelcomeUser::class.java)
             startActivity(intent)
-//            postUser()
+
         }
 
     }
@@ -55,9 +69,11 @@ class UserInterset : AppCompatActivity() {
         val tmpList = ArrayList<String>()
         tmpList.add("헬스")
         tmpList.add("필라테스")
-        tmpList.add("1")
-        tmpList.add("2")
-        tmpList.add("3")
+        tmpList.add("클라이밍")
+        tmpList.add("요가")
+        tmpList.add("런닝")
+        tmpList.add("수영")
+        tmpList.add("싸이클")
         // 여기에 서버 통신으로 리스트를 받아올 예정
         val linearLayout = binding.buttonContainer // 버튼들을 추가할 LinearLayout
 
@@ -119,6 +135,24 @@ class UserInterset : AppCompatActivity() {
         return count
     }
 
+//    fun postUser(){
+//        val data = intent.getStringExtra("name")!!
+//        api.postUser(PostUser(null,)).enqueue(object : Callback<Token> {
+//            override fun onResponse(call: Call<PostResult>, response: Response<PostResult>) {
+//                Log.d("log",response.toString())
+//                Log.d("log", response.body().toString())
+//                if(!response.body().toString().isEmpty())
+//                    binding.text.setText(response.body().toString());
+//            }
+//
+//            override fun onFailure(call: Call<PostResult>, t: Throwable) {
+//                // 실패
+//                Log.d("log",t.message.toString())
+//                Log.d("log","fail")
+//            }
+//        })
+//    }
+
     fun postUser(information: UserInfo) {
         var username = intent.getStringExtra("name")!!
         val gson = GsonBuilder().create()
@@ -127,7 +161,7 @@ class UserInterset : AppCompatActivity() {
         val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
         val request = Request.Builder()
             .method("POST", requestBody)
-            .url("")
+            .url("http://3.36.163.92/api/auth/join")
             .build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -140,9 +174,19 @@ class UserInterset : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 if(response.isSuccessful) {
                     HmutSharedPreferences.setUserInterest(this@UserInterset, interList)
-                    HmutSharedPreferences.setUserName(this@UserInterset, username)
+//                    HmutSharedPreferences.setUserName(this@UserInterset, username)
                     Log.i("Success", response.message)
                     Log.i("Success", response.toString())
+                    HmutSharedPreferences.setUserName(this@UserInterset,"김원진")
+                    Thread{
+                        var str = response.body?.string()
+                        Log.i("test",str!!)
+                        val a = gson.fromJson<Token>(str,Token::class.java)
+                        println(a.accessToken)
+                    }.start()
+
+
+
                     finish()
                 }
                 else{

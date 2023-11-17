@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="닉네임 변경"
+        android:enabled="true"
+        android:id="@+id/user_setting_changeUsername"
+        />
+    <item
+        android:title="프로필 사진 변경"
+        android:enabled="true"
+        android:id="@+id/user_setting_changeUserImg"
+        />
+    <item
+        android:title="관심사 변경"
+        android:enabled="true"
+        android:id="@+id/user_setting_changeTag"
+        />
+    <item
+        android:title="로그아웃"
+        android:enabled="true"
+        android:id="@+id/user_setting_logout"
+        />
+</menu>

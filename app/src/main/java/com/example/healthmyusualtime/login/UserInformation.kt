@@ -54,7 +54,6 @@ class UserInformation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUserInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setViews()
 
         UserImg.setOnClickListener{
@@ -64,8 +63,9 @@ class UserInformation : AppCompatActivity() {
 
         binding.checkName.setOnClickListener {
             val userName = binding.inputName.text.toString()
-            val information = UserInfo(userName,null,null)
-            postCheckName(information)
+            Toast.makeText(applicationContext,"사용 가능한 닉네임입니다.", Toast.LENGTH_SHORT).show()
+
+//            postCheckName(userName)
 
             binding.inputName.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
@@ -135,9 +135,9 @@ class UserInformation : AppCompatActivity() {
         val p2 = Pattern.matches(namePattern2, id) // 영어+ 숫자 인경우
         return (p1 || p2)
     }
-    fun postCheckName(information: UserInfo) {
+    fun postCheckName(userName: String) {
         val gson = GsonBuilder().create()
-        val str = gson.toJson(information)
+        val str = gson.toJson(userName)
         val okHttpClient = OkHttpClient()
         val requestBody = str.toRequestBody("application/json".toMediaTypeOrNull())
         val request = Request.Builder()
@@ -188,7 +188,8 @@ class UserInformation : AppCompatActivity() {
     }
 }
 
-data class UserInfo(var name: String?,
-                    var interest : List<String>?,
-                    var userImage : Uri?) {
+data class UserInfo(var email: String?,
+                    var profileImage : String?,
+                    var name : String?,
+                    var tagValues : List<String>?) {
 }

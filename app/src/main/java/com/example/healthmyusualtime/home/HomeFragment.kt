@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthmyusualtime.group.DataGroup
@@ -40,8 +41,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeGroupRV = binding.RVHomeGroup
         groupList = ArrayList<DataGroup>()
-        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","매일","3:1000이 목표","너무좋아요",8))
-        groupList.add(DataGroup(null, null,"우리동네필라테스","필라테스","매일","우당탕탕 필라테스 도전기","너무좋아요",5))
+        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","매일","3:1000이 목표","너무좋아요",8,null))
+        groupList.add(DataGroup(null, null,"우리동네필라테스","필라테스","매일","우당탕탕 필라테스 도전기","너무좋아요",5,null))
         if (groupList.size != 0) {
             binding.noGroup.setVisibility(View.INVISIBLE)
             binding.searchBtn.setVisibility(View.INVISIBLE)

@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.healthmyusualtime.home.HomeFragment
+import com.example.healthmyusualtime.login.HmutSharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+//        HmutSharedPreferences.Logout_User(this)
         if(true){       //로그인 안돼있으면
             val loginIntent = Intent(this, Login::class.java)
             startActivity(loginIntent)
@@ -65,5 +66,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.main_layout, fragment)
             .commit()
     }
+
 
 }

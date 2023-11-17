@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.healthmyusualtime.group.DataGroup
 import com.example.healthmyusualtime.group.GroupMain
 import com.example.healthmyusualtime.R
@@ -30,20 +31,20 @@ class HomeGroupAdapter(private val context: Context, private  val datalist: Muta
             val HomeGroupFre = itemView.findViewById<TextView>(R.id.HomeGroupFrequncy)
             val HomeGroupInter = itemView.findViewById<TextView>(R.id.HomeGroupInter)
         fun bind(dataGroup: DataGroup, context: Context){
-                if(dataGroup.groupImg != null){
-                    val resourceld = context.resources.getIdentifier(dataGroup.groupImg.toString(),"drawavle",context.packageName)
+                if(dataGroup.imageUrl != null){
+                    val resourceld = context.resources.getIdentifier(dataGroup.imageUrl.toString(),"drawable",context.packageName)
                     if(resourceld > 0)
-                        HomeGroupImg.setImageResource(resourceld)
+                        Glide.with(itemView).load(dataGroup.imageUrl).into(HomeGroupImg)
                     else
-                        HomeGroupImg.setImageResource(R.mipmap.ic_launcher_round)
+                        HomeGroupImg.setImageResource(R.drawable.img_1)
                 }
                 else
-                    HomeGroupImg.setImageResource(R.mipmap.ic_launcher_round)
-                HomeGroupIntro.text = dataGroup.groupIntro
+                    HomeGroupImg.setImageResource(R.drawable.img_1)
+                HomeGroupIntro.text = dataGroup.introduceMessage
                 HomeGroupMember.text = dataGroup.groupMember.toString()
                 HomeGroupName.text = dataGroup.groupName
-                HomeGroupFre.text = "#${dataGroup.groupfrequency}"
-                HomeGroupInter.text  = "#${dataGroup.groupField}"
+                HomeGroupFre.text = "#${dataGroup.groupFrequency}"
+                HomeGroupInter.text  = "#${dataGroup.tags}"
 
                 itemView.setOnClickListener(){
                     val intent = Intent(context, GroupMain::class.java) // 테스트 해보는거 그룹으로 넘어감

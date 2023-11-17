@@ -40,10 +40,15 @@ class SearchGroupFragment : Fragment() {
     val MAX_SELECTION = 3
     var interList = ArrayList<String>()
     var buttonList = ArrayList<Button>()
+
+    lateinit var tmpRV: RecyclerView
+    lateinit var tmpList : ArrayList<DataGroup>
+    lateinit var tmprvset : ArrayList<DataSearchGroup>
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,20 +57,36 @@ class SearchGroupFragment : Fragment() {
         makebtn()
         groupRecyclerView = binding.RVGroupList
         groupList = ArrayList<DataGroup>()
-        groupList.add(DataGroup(null, null,"test1","헬스","매일","test1","우리는 너무 행복해요",2))
-        groupList.add(DataGroup(null, null,"test2","헬스","매일","test2","우리는 너무 행복해요",2))
-        groupList.add(DataGroup(null, null,"test3","헬스","매일","test3","우리는 너무 행복해요",2))
-        groupList.add(DataGroup(null, null,"test4","헬스","매일","test3","우리는 너무 행복해요",2))
-        groupList.add(DataGroup(null, null,"test5","헬스","매일","test3","우리는 너무 행복해요",2))
+        groupList.add(DataGroup(null, null,"언더아머수호반","헬스","매일","3:1000이 목표","우리는 너무 행복해요",2,null))
+        groupList.add(DataGroup(null, null,"고잔동 모임","헬스","매일","고잔동이 최고","우리는 너무 행복해요",2,null))
+        groupList.add(DataGroup(null, null,"산곡동 모임","헬스","매일","산곡동 사람들 다 모여라","우리는 너무 행복해요",2,null))
+        groupList.add(DataGroup(null, null,"성수동 모임","헬스","매일","갬성 헬스","우리는 너무 행복해요",2,null))
+        groupList.add(DataGroup(null, null,"와우산로 모임","헬스","매일","홍익people","우리는 너무 행복해요",2,null))
         groupList.toList()
         rvset = ArrayList<DataSearchGroup>()
         rvset.add(DataSearchGroup("헬스",groupList))
         rvset.add(DataSearchGroup("수영",groupList))
-        rvset.add(DataSearchGroup("등산",groupList))
+        rvset.add(DataSearchGroup("필라테스",groupList))
         val GroupSearchListRVAdapter = GroupSearchListAdapter(mainActivity, rvset.toMutableList())
         groupRecyclerView.adapter = GroupSearchListRVAdapter
 
+        //더미 지울거
+        tmpRV = binding.RVTmp
+        tmpList = ArrayList<DataGroup>()
+        tmpList.add(DataGroup(null, null,"국토종주 가즈아","헬스","매일","아라뱃길 국토종주","우리는 너무 행복해요",2,null))
+        tmpList.add(DataGroup(null, null,"한강 자전거","헬스","매일","한강에서 자전거 타요","우리는 너무 행복해요",2,null))
+        tmpList.add(DataGroup(null, null,"자전거는 핑계","헬스","매일","같이 자전거타요","우리는 너무 행복해요",2,null))
+        tmpList.add(DataGroup(null, null,"성수동 모임","헬스","매일","갬성 싸이클","우리는 너무 행복해요",2,null))
+        tmpList.add(DataGroup(null, null,"와우산로 모임","헬스","매일","홍익people","우리는 너무 행복해요",2,null))
+        tmprvset = ArrayList<DataSearchGroup>()
+        tmprvset.add(DataSearchGroup("싸이클",tmpList))
+
+        // 여기까지
+
+
         binding.interSearch.setOnClickListener(){
+            binding.RVTmp.visibility = View.INVISIBLE
+
             binding.RVGroupList.visibility = View.INVISIBLE
             binding.searchBtn.visibility = View.VISIBLE
             binding.previousBtn.visibility = View.VISIBLE
@@ -73,13 +94,19 @@ class SearchGroupFragment : Fragment() {
         }
 
         binding.searchBtn.setOnClickListener(){
-            binding.RVGroupList.visibility = View.VISIBLE
+            val tmpRVAdapter = GroupSearchListAdapter(mainActivity, tmprvset.toMutableList())
+            tmpRV.adapter = tmpRVAdapter
+            binding.RVTmp.visibility = View.VISIBLE
+
+            binding.RVGroupList.visibility = View.INVISIBLE
             binding.searchBtn.visibility = View.INVISIBLE
             binding.previousBtn.visibility = View.INVISIBLE
             binding.buttonContainer.visibility = View.INVISIBLE
         }
 
         binding.previousBtn.setOnClickListener(){
+            binding.RVTmp.visibility = View.INVISIBLE
+
             binding.RVGroupList.visibility = View.VISIBLE
             binding.searchBtn.visibility = View.INVISIBLE
             binding.previousBtn.visibility = View.INVISIBLE
@@ -88,13 +115,20 @@ class SearchGroupFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     fun makebtn(){
         val tmpList = ArrayList<String>()
         tmpList.add("헬스")
         tmpList.add("필라테스")
-        tmpList.add("1")
-        tmpList.add("2")
-        tmpList.add("3")
+        tmpList.add("클라이밍")
+        tmpList.add("요가")
+        tmpList.add("런닝")
+        tmpList.add("수영")
+        tmpList.add("싸이클")
         // 여기에 서버 통신으로 리스트를 받아올 예정
         val linearLayout = binding.buttonContainer // 버튼들을 추가할 LinearLayout
 

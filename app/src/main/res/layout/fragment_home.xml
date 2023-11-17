@@ -29,12 +29,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내가 가입한 그룹"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Home_Group"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/rv_homegroup"

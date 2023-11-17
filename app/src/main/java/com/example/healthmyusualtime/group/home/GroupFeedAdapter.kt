@@ -16,6 +16,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -53,8 +54,9 @@ class GroupFeedAdapter (private val context: Context, private val dataList: Muta
             if(!visible){
                 itemView.findViewById<Toolbar>(R.id.Feed_menu_toolbar).visibility = View.GONE
             }
-            if(datafeed.writer.userImage !=null){
-                Homeuserimg.setImageURI(datafeed.writer.userImage)
+            if(datafeed.writer.profileImage !=null){
+//                val a = datafeed.writer.profileImage.toUri()
+//                Homeuserimg.setImageURI(datafeed.writer.profileImage.toUri())
             }
             else{
                 Homeuserimg.setImageResource(R.mipmap.ic_launcher_round)
