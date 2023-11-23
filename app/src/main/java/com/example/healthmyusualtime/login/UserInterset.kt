@@ -15,8 +15,8 @@ import com.example.healthmyusualtime.R
 import com.example.healthmyusualtime.R.drawable
 import com.example.healthmyusualtime.databinding.ActivityUserIntersetBinding
 import com.example.healthmyusualtime.retrorit.PostUser
-import com.example.healthmyusualtime.retrorit.Token
 import com.example.healthmyusualtime.retrorit.UserService
+import com.example.healthmyusualtime.retrorit.data
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.kakao.sdk.user.model.User
@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
@@ -48,12 +49,13 @@ class UserInterset : AppCompatActivity() {
         }
 
         binding.UserInfoComplete.setOnClickListener(){
+            Log.i("test", "test")
             val image = HmutSharedPreferences.getUserImageUrl(this)
             var username = intent.getStringExtra("name")!!
             val tag = ArrayList<String>()
             tag.add("YOGA")
             tag.add("CYCLE")
-            var information = UserInfo("a@naver.com",image,username,tag)
+            var information = UserInfo("esz12@naver.com",image,username,tag)
             postUser(information)
             val intent = Intent(this, WelcomeUser::class.java)
             startActivity(intent)
@@ -135,23 +137,29 @@ class UserInterset : AppCompatActivity() {
         return count
     }
 
-//    fun postUser(){
-//        val data = intent.getStringExtra("name")!!
-//        api.postUser(PostUser(null,)).enqueue(object : Callback<Token> {
-//            override fun onResponse(call: Call<PostResult>, response: Response<PostResult>) {
-//                Log.d("log",response.toString())
-//                Log.d("log", response.body().toString())
-//                if(!response.body().toString().isEmpty())
-//                    binding.text.setText(response.body().toString());
+//    fun postUser(info : UserInfo){
+//        val retrofit = UserService.create().postUser(PostUser(info.email,info.profileImage,info.name,info.tagValues))
+//        retrofit.enqueue(object : Callback<data> {
+//            override fun onResponse(call: Call<data>, response: Response<data>) {
+//                if(response.isSuccessful() && (response.body() != null)){
+//                    Log.i("test", response.body().toString())
+////                    Thread{
+////                        var a = response.body()
+////                        Log.i("test",a)
+////                    }.start()
+//                }
+//                else{
+//                    Log.e("connection error",response.body().toString())
+//                }
+//
 //            }
 //
-//            override fun onFailure(call: Call<PostResult>, t: Throwable) {
-//                // 실패
-//                Log.d("log",t.message.toString())
-//                Log.d("log","fail")
+//            override fun onFailure(call: Call<data>, t: Throwable) {
+//                Log.e("fail",t.message.toString())
+//                Log.e("fail",t.toString())
 //            }
 //        })
-//    }
+//   }
 
     fun postUser(information: UserInfo) {
         var username = intent.getStringExtra("name")!!
@@ -177,12 +185,14 @@ class UserInterset : AppCompatActivity() {
 //                    HmutSharedPreferences.setUserName(this@UserInterset, username)
                     Log.i("Success", response.message)
                     Log.i("Success", response.toString())
-                    HmutSharedPreferences.setUserName(this@UserInterset,"김원진")
+//                    HmutSharedPreferences.setUserName(this@UserInterset,"김원진")
                     Thread{
                         var str = response.body?.string()
                         Log.i("test",str!!)
-                        val a = gson.fromJson<Token>(str,Token::class.java)
-                        println(a.accessToken)
+//                        val a = gson.fromJson<data>(str,data::class.java)
+                        var tmp = JSONObject(response.body.string())
+                        println(tmp.getString("data"))
+
                     }.start()
 
 
@@ -190,7 +200,7 @@ class UserInterset : AppCompatActivity() {
                     finish()
                 }
                 else{
-                    Log.e("connection error",response.body.toString())
+                    Log.e("connection error",response.body.string())
                 }
             }
         })

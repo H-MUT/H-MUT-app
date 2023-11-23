@@ -16,18 +16,16 @@ data class PostUser(
     @SerializedName("tagValues")
     val tagValues : ArrayList<String>?,
 
-    @SerializedName("userId")
-    val userId : Int?
 )
 
-class Token(
-    @SerializedName("accessToken")
+data class data(
+    @SerializedName("data.accessToken")
     val accessToken : String? = null,
 
-    @SerializedName("refreshToken")
+    @SerializedName("data.refreshToken")
     val refreshToken : String? = null,
 
-    @SerializedName("userId")
+    @SerializedName("data.userId")
     val userId : String? = null
 )
 

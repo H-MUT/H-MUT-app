@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        HmutSharedPreferences.Logout_User(this)
+        HmutSharedPreferences.Logout_User(this)
         if(true){       //로그인 안돼있으면
             val loginIntent = Intent(this, Login::class.java)
             startActivity(loginIntent)

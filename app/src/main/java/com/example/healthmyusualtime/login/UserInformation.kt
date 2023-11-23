@@ -191,5 +191,5 @@ class UserInformation : AppCompatActivity() {
 data class UserInfo(var email: String?,
                     var profileImage : String?,
                     var name : String?,
-                    var tagValues : List<String>?) {
+                    var tagValues : ArrayList<String>?) {
 }

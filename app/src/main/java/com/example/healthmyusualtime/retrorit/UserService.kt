@@ -12,7 +12,7 @@ interface UserService {
     @POST("auth/join")
     fun postUser(
         @Body jsonparams: PostUser
-    ): Call<Token>
+    ): Call<data>
     companion object {
         private const val BASE_URL = "http://3.36.163.92/api/" // 주소
 
